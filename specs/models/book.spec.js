@@ -2,7 +2,7 @@ const { expect, factory, pending, Models } = require("../helpers");
 const { Association, DataTypes } = require("sequelize");
 const { Book } = Models;
 
-describe("ModelName", () => {
+describe("Book", () => {
   const { tableName, tableAttributes, associations } = Book;
 
   beforeEach(async () => {
@@ -22,45 +22,43 @@ describe("ModelName", () => {
           .to.be.instanceOf(DataTypes.STRING);
       });
 
-      it("author:STRING", () => {
+      it("AuthorId:INTEGER", () => {
         expect(tableAttributes)
-          .to.have.own.property("author")
+          .to.have.own.property("AuthorId")
           .that.has.property("type")
-          .to.be.instanceOf(DataTypes.STRING);
+          .to.be.instanceOf(DataTypes.INTEGER);
       });
     });
 
-    describe('is expected to have associations', () => {
-      it('Author:BelongsTo', () => {
+    describe("is expected to have associations", () => {
+      it("Author:BelongsTo", () => {
         expect(associations)
-          .to.have.own.property('author')
+          .to.have.own.property("author")
           .to.be.instanceOf(Association.BelongsTo)
-          .that.has.property('foreignKey', 'AuthorId')
+          .that.has.property("foreignKey", "AuthorId");
       });
     });
   });
 
-  describe.only("Instance", () => {
+  describe("Instance", () => {
     it("is expected to have a valid factory", () => {
       expect(subject).to.include({
-        title: 'My awesome Book'
-      })
-
+        title: "My awesome Book",
+      });
     });
 
     describe("is expected to have properties", () => {
-      it('title', () => {
-        expect(subject)
-          .to.have.property('title').to.be.a('string')
+      it("title", () => {
+        expect(subject).to.have.property("title").to.be.a("string");
       });
     });
 
     describe("is expected to have association accessors", () => {
       it("for the Author association", () => {
         expect(subject)
-          .to.respondTo('getAuthor')
-          .and.respondTo('setAuthor')
-          .and.respondTo('createAuthor')
+          .to.respondTo("getAuthor")
+          .and.respondTo("setAuthor")
+          .and.respondTo("createAuthor");
       });
     });
   });
