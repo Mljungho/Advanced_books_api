@@ -1,4 +1,4 @@
-const { expect, factory, pending, Models } = require("../helpers");
+const { expect, factory, Models } = require("../helpers");
 const { Association, DataTypes } = require("sequelize");
 const { Book } = Models;
 
