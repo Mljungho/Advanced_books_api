@@ -1,7 +1,7 @@
 const { expect, factory, pending } = require('../helpers')
 const { Association, DataTypes } = require('sequelize')
 
-describe.only('Book', () => {
+describe('Book', () => {
   // <Name>Model = factory.factories.<Name>.Model
   // const { tableName, tableAttributes, associations } = <Name>Model
 

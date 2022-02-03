@@ -3,9 +3,7 @@ const { Association, DataTypes } = require("sequelize");
 const { Book } = Models;
 
 describe("ModelName", () => {
-  // BookModel = factory.factories.Book.Model
-  BookModel = new Book();
-  const { tableName, tableAttributes, associations } = BookModel.constructor;
+  const { tableName, tableAttributes, associations } = Book;
 
   beforeEach(async () => {
     subject = await factory.create("Book");
@@ -13,7 +11,7 @@ describe("ModelName", () => {
 
   describe("Model", () => {
     it('is expected to have table name "Book"', () => {
-      expect(tableName).to.equal("Book");
+      expect(tableName).to.equal("Books");
     });
 
     describe("is expected to have property:", () => {
@@ -32,40 +30,37 @@ describe("ModelName", () => {
       });
     });
 
-    // describe('is expected to have associations', () => {
-    //   it('<AssociatedModel>:<AssociationType>', () => {
-    //     // expect(associations)
-    //     //   .to.have.own.property('<model_alias_or_name>')
-    //     //   .to.be.instanceOf(Association.<AssociationType>)
-    //     //   .that.has.property('foreignKey', '<field>')
-    //     pending();
-    //   });
-    // });
+    describe('is expected to have associations', () => {
+      it('Author:BelongsTo', () => {
+        expect(associations)
+          .to.have.own.property('author')
+          .to.be.instanceOf(Association.BelongsTo)
+          .that.has.property('foreignKey', 'AuthorId')
+      });
+    });
   });
 
-  describe("Instance", () => {
+  describe.only("Instance", () => {
     it("is expected to have a valid factory", () => {
-      // expect(subject).to.include({
-      //   attribute: 'Default Factory Value'
-      // })
-      pending();
+      expect(subject).to.include({
+        title: 'My awesome Book'
+      })
+
     });
 
     describe("is expected to have properties", () => {
-      // it('<propertyName>', () => {
-      //   expect(subject)
-      //     .to.have.property('<propertyName>').to.be.a('<data_type>')
-      // });
-      pending();
+      it('title', () => {
+        expect(subject)
+          .to.have.property('title').to.be.a('string')
+      });
     });
 
     describe("is expected to have association accessors", () => {
-      it("for the <AssociatedModel> association", () => {
-        // expect(subject)
-        //   .to.respondTo('get<AssociatedModel>')
-        //   .and.respondTo('set<AssociatedModel>')
-        //   .and.respondTo('create<AssociatedModel>')
-        pending();
+      it("for the Author association", () => {
+        expect(subject)
+          .to.respondTo('getAuthor')
+          .and.respondTo('setAuthor')
+          .and.respondTo('createAuthor')
       });
     });
   });
